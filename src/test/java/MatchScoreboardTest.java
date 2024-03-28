@@ -19,7 +19,7 @@ public class MatchScoreboardTest {
     }
 
     @Test
-    public void testStartNewMatch() {
+    public void testStartNewMatch() throws Exception {
         scoreboard.startNewMatch("Poland", "United States", Instant.now());
         assertEquals(1, scoreboard.getMatchesSummary().size());
     }
@@ -46,7 +46,7 @@ public class MatchScoreboardTest {
     }
 
     @Test
-    public void testUpdateScore() {
+    public void testUpdateScore() throws Exception {
         final String matchId = scoreboard.startNewMatch("Poland", "United States", Instant.now());
         scoreboard.updateScore(matchId, 1, 0);
         Match match = scoreboard.getMatchesSummary().get(0);
@@ -55,7 +55,7 @@ public class MatchScoreboardTest {
     }
 
     @Test
-    public void testUpdateScoreWithNullParameters() {
+    public void testUpdateScoreWithNullParameters() throws Exception {
         final String matchId = scoreboard.startNewMatch("Poland", "United States", Instant.now());
         assertThrows(IllegalArgumentException.class, () -> scoreboard.updateScore(matchId, 1, null));
         assertThrows(IllegalArgumentException.class, () -> scoreboard.updateScore(matchId, null, 0));
@@ -63,21 +63,21 @@ public class MatchScoreboardTest {
     }
 
     @Test
-    public void testFinishMatch() {
+    public void testFinishMatch() throws Exception {
         final String matchId = scoreboard.startNewMatch("Poland", "United States", Instant.now());
         scoreboard.finishMatch(matchId);
         assertTrue(scoreboard.getMatchesSummary().isEmpty());
     }
 
     @Test
-    public void testFinishMatchWithNullParameters() {
+    public void testFinishMatchWithNullParameters() throws Exception {
         scoreboard.startNewMatch("Poland", "United States", Instant.now());
         assertThrows(IllegalArgumentException.class, () -> scoreboard.finishMatch(null));
         assertFalse(scoreboard.getMatchesSummary().isEmpty());
     }
 
     @Test
-    public void testMatchesSummaryOrder() {
+    public void testMatchesSummaryOrder() throws Exception {
         final String match1 = scoreboard.startNewMatch("Poland", "United States", Instant.now());
         scoreboard.updateScore(match1, 2, 2); // Total score 4
 

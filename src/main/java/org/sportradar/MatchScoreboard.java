@@ -1,20 +1,21 @@
 package org.sportradar;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import org.sportradar.exception.DuplicateCountryException;
+import org.sportradar.exception.InvalidCountryNameException;
+import org.sportradar.validator.MatchValidator;
+import org.sportradar.validator.ValidationUtils;
 
 import java.time.Instant;
 import java.util.*;
 
-@Getter
-@Setter
-@EqualsAndHashCode
 public class MatchScoreboard {
 
     private final Map<String, Match> activeMatches = new HashMap<>();
 
-    public String startNewMatch(final String homeTeam, final String awayTeam, final Instant startTime) {
+    public String startNewMatch(final String homeTeam, final String awayTeam, final Instant startTime) throws InvalidCountryNameException, DuplicateCountryException {
+        ValidationUtils.requireNonNull(homeTeam, awayTeam, startTime);
+        MatchValidator.getInstance().validateCountries(homeTeam, awayTeam);
+
         final String matchId = UUID.randomUUID().toString();
         final Match match = new Match(homeTeam, awayTeam, startTime);
 
@@ -24,6 +25,8 @@ public class MatchScoreboard {
     }
 
     public void updateScore(final String matchId, final Integer homeScore,  final Integer awayScore) {
+        ValidationUtils.requireNonNull(matchId, homeScore, awayScore);
+
         if (activeMatches.containsKey(matchId)) {
             final Match match = activeMatches.get(matchId);
 
@@ -33,6 +36,8 @@ public class MatchScoreboard {
     }
 
     public void finishMatch(final String matchId) {
+        ValidationUtils.requireNonNull(matchId);
+
         activeMatches.remove(matchId);
     }
 
