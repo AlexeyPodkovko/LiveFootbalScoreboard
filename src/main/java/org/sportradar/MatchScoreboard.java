@@ -23,7 +23,7 @@ public class MatchScoreboard {
         return matchId;
     }
 
-    public void updateScore(final String matchId, final int homeScore, final int awayScore) {
+    public void updateScore(final String matchId, final Integer homeScore,  final Integer awayScore) {
         if (activeMatches.containsKey(matchId)) {
             final Match match = activeMatches.get(matchId);
 
