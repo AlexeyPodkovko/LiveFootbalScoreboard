@@ -13,3 +13,4 @@ The scoreboard supports the following operations:
 Notes:
  - Most observations and decisions have been documented in the Javadoc. 
  - Additional validation, such as preventing negative scores during updates and others, could have been implemented. However, they were not added since the general validation mechanism is already apparent and easily extendable.
+ - Ideally, it would be best to create separate tests for the validator, but in this case, since the MatchValidator is used exclusively within the MatchScoreboard, and there are test cases for all the validator's methods, doing so would be redundant.
