@@ -1,7 +1,7 @@
+package org.sportradar;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sportradar.Match;
-import org.sportradar.MatchScoreboard;
 import org.sportradar.exception.DuplicateCountryException;
 import org.sportradar.exception.InvalidCountryNameException;
 
