@@ -24,7 +24,7 @@ public class MatchScoreboardTest {
     }
 
     @Test
-    public  void testUpdateScore() {
+    public void testUpdateScore() {
         final String matchId = scoreboard.startNewMatch("HomeTeam", "AwayTeam", Instant.now());
         scoreboard.updateScore(matchId, 1, 0);
         Match match = scoreboard.getMatchesSummary().get(0);
